@@ -19,13 +19,13 @@ cloudinary.v2.config({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(
-	cors({
-		origin: process.env.FRONTEND_URL,
-		credentials: true,
-		methods: ["GET", "POST", "PUT", "DELETE"],
-	})
-); // for 2 port running (frontend + backend) in single machine
+// app.use(
+// 	cors({
+// 		origin: process.env.FRONTEND_URL,
+// 		credentials: true,
+// 		methods: ["GET", "POST", "PUT", "DELETE"],
+// 	})
+// ); // for 2 port running (frontend + backend) in single machine
 
 // Route
 import adminRoutes from "./routes/adminRoutes.js";
