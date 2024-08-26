@@ -1,1 +1,1 @@
-export const server = "https://real-trust-full-stack-git-master-amanpatellls-projects.vercel.app/api/v1";
+export const server = "https://real-trust-full-stack.vercel.app/api/v1";
