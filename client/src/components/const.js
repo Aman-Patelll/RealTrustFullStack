@@ -1,1 +1,1 @@
-export const server = "http://localhost:5000/api/v1";
+export const server = "https://real-trust-full-stack-7x6eykttv-amanpatellls-projects.vercel.app/";
