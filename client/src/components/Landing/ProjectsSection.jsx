@@ -7,10 +7,7 @@ function ProjectsSection() {
 	const [project, setProject] = useState([]);
 	useEffect(() => {
 		axios
-			.get(`${server}/project`, {
-			  mode: 'cors',
-			  credentials: 'include'
-			})
+			.get(`${server}/project`)
 			.then((res) => {
 				setProject(res.data.project);
 			})
