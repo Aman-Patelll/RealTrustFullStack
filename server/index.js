@@ -30,7 +30,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
 app.use("/api/v1/admin", adminRoutes);
-app.use("/api/v1/", userRoutes);
+app.use("/api/v1", userRoutes);
 
 app.get("/", (req, res) => {
 	return res.status(200).send("<h1>Welcome to Node server</h1>");
