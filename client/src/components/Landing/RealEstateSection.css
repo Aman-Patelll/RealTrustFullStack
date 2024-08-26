@@ -1,0 +1,114 @@
+.real-estate-section {
+    font-family: Arial, sans-serif;
+    color: white;
+    font-weight: 700;
+    background-color: black;
+  }
+  
+  .hero-section {
+    background: url('../../Assets/Rectangle.svg') no-repeat center center;
+    
+    display: flex;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 100px 20px;
+  }
+  
+  .hero-section h1 {
+    width: 800px;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .learn-more-btn {
+    background-color: white;
+    border: none;
+    color: rgb(97, 97, 249);
+    padding: 10px 50px;
+    text-align:center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  
+  .footer {
+    background-color: #0056b3;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+  }
+  
+  .footer-nav {
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-nav ul li {
+    display: inline;
+    margin: 0 15px;
+    font-size: 14px;
+    color: #fff;
+  }
+  
+  .subscribe-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .subscribe-section span {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  .subscribe-section input {
+    margin: 0 20px;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+  
+  .subscribe-btn {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  .footer-bottom {
+    margin: 20px;
+    padding: 20px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  
+  .social-icons i {
+    margin: 0 5px;
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  

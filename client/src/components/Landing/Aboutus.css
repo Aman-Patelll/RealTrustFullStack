@@ -1,0 +1,31 @@
+.about-us {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+  }
+  
+  .about-us h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  .about-us p {
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 30px;
+    width: 60%;
+    text-align: center;
+  }
+  
+  .learn-more-btn {
+    background-color: #f2f1ff;
+    color: #007bff;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }

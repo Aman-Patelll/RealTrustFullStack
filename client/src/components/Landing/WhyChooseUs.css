@@ -1,0 +1,53 @@
+.why-choose-us {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+  
+  .why-choose-us-heading {
+    font-size: 40px;
+    margin-bottom: 30px;
+    color: #007bff;
+  }
+  
+  .column {
+    display: flex;
+    margin: 0 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .column div {
+    width: 50px;
+    height: 50px;
+    font-size: 48px;
+    color: #007bff;
+}
+
+.column h3 {
+    font-size: 30px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .column p {
+    font-size: 16px;
+    color: #777;
+  }
+
+  .icon-home {
+    background-image: url("../../Assets/home.svg");
+    background-repeat: no-repeat;
+}
+
+.icon-brush {
+    background-image: url("../../Assets/paintbrush-2.svg");
+    background-repeat: no-repeat;
+}
+
+.icon-dollar {
+    background-image: url("../../Assets/circle-dollar-sign.svg");
+    background-repeat: no-repeat;
+  }

@@ -1,0 +1,52 @@
+.consultation-form-container {
+    background-color: #003366b6; /* Navy background color */
+    color: white; /* White text color */
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    margin: 0 auto; /* Center align on the page */
+}
+
+.consultation-form-container h2 {
+    margin: 0;
+    font-size: 40px;
+    color: white;
+}
+
+.consultation-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.consultation-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0033664b;
+    color: white;
+    font-size: medium;
+    font-weight: 600;
+    border: 1px solid white;
+}
+.consultation-form input::placeholder {
+    color: white;
+}
+
+.consultation-form button {
+    padding: 10px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.consultation-form button:hover {
+    background-color: darkorange;
+}
