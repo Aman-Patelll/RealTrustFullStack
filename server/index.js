@@ -21,11 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
 	cors({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "*",
-        "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
-    })
-	next();
+		origin: process.env.FRONTEND_URL,
+		credentials: true,
+		methods: ["GET", "POST", "PUT", "DELETE"],
+	})
 ); // for 2 port running (frontend + backend) in single machine
 
 // Route
