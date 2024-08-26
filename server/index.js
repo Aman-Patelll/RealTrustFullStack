@@ -7,6 +7,7 @@ import cloudinary from "cloudinary";
 
 const app = express(); // creating app server
 
+app.use(cors()); // for 2 port running (frontend + backend) in single machine
 dotenv.config();
 connectDB(); // db connection
 
@@ -19,7 +20,6 @@ cloudinary.v2.config({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors()); // for 2 port running (frontend + backend) in single machine
 
 // Route
 import adminRoutes from "./routes/adminRoutes.js";
