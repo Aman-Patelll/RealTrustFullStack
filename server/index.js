@@ -7,7 +7,11 @@ import cloudinary from "cloudinary";
 
 const app = express(); // creating app server
 
-app.use(cors()); // for 2 port running (frontend + backend) in single machine
+app.use(cors({
+  origin: "https://realtrust-full-stack.vercel.app", // or use '*' to allow all origins
+  credentials: true, // if you are dealing with cookies
+}));
+
 dotenv.config();
 connectDB(); // db connection
 
