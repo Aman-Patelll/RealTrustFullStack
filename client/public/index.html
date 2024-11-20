@@ -1,43 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SetUp</title>
+</head>
+<body>
+    <pre>
+        /*
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+1: npm init
+2: Create 6 Folder :- config, controllers, middlewares, routes, models, utils
+3: Create 2 File :- server.js, app.js
+4: Dawnload package :- npm i express, mongoose, jsonwebtoken, cookie-parser, cors, bcrypt, dotenv, validator, extra :- npm i cloudinary, razorpay, nodemailer, datauri, multer, node-corn
+5: add start script :- "dev": "nodemon server.js",
+6: add "type": "module", add after decription
+7: create app using express in app.js and export default
+8: import app in server.js and listen on PORT
+9: use middlewares in app : express.json(), express.urlencodded({extended: true}), cors(), cookieParser()
+10: create config.env file in config folder, configure dotenv in app.js 
+11: connect mongodb using mongoose.connect('#url').then(() => log()).catch((err)=>log(err)) and use connectDB in server.js
+12: create model in models folder
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+import mongoose from "mongoose";
+import validator from "validator";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import crypto from "crypto";
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+const schema = new mongoose.Schema({
+	name: {
+		type: String,
+		required: [true, "Please enter your name"],
+	},
+	email: {
+		type: String,
+		required: [true, "Please enter your email"],
+		unique: true,
+		validate: validator.isEmail,
+	},
+	password: {
+		type: String,
+		required: [true, "Please enter your password"],
+		minLength: [6, "Password must be at least 6 characters"],
+		select: false,
+	},
+	role: {
+		type: String,
+		enum: ["admin", "user"],
+		default: "user",
+	},
+
+    //course: {
+    //    type: mongoose.Schema.Types.ObjectId,
+    //    ref: "Course",
+    //},
+});
+
+schema.pre("save", async function (next) {
+	if (!this.isModified("password")) return next();
+	this.password = await bcrypt.hash(this.password, 10);
+	next();
+});
+
+schema.methods.comparePassword = async function (password) {
+	return await bcrypt.compare(password, this.password);
+};
+
+schema.methods.getJWTToken = function () {
+	return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+		expiresIn: "15d",
+	});
+};
+
+export const User = mongoose.model("User", schema);
+
+13: sendToken.js in utils and call in sigup and login at last sendToken(res, user, "Registered Successfully", 201);
+
+export const sendToken = (res, user, message, statusCode = 200) => {
+  const token = user.getJWTToken();
+  const options = {
+    expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+    //secure: true, //not in postman
+    sameSite: "none",
+  };
+
+  res.status(statusCode).cookie("token", token, options).json({
+    success: true,
+    message,
+    user,
+  });
+};
+
+14: create catchAsyncError.js in middlewares folder
+export const catchAsyncError = (passedFunction) => (req, res, next) => {
+	Promise.resolve(passedFunction(req, res, next)).catch(next);
+};
+
+15: create errorMiddleware.js in middlewares folder
+const ErrorMiddleware = (err, req, res, next) => {
+	err.statusCode = err.statusCode || 500;
+
+	err.message = err.message || "Internal Server Error";
+
+	res.status(err.statusCode).json({
+		success: false,
+		message: err.message,
+	});
+};
+
+export default ErrorMiddleware;
+
+16: create errorHandler.js in utils and use like that if (user) return next(new ErrorHandler("User Already Exist", 409));
+class ErrorHandler extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
+
+export default ErrorHandler;
+
+17: Create Routes in router folder using const router = express.Router() : router.route().get()
+
+18: import and use routes in app.js
+
+19: Start building controller 
+
+20: isAuthenticated middlewares in middlewares folder in file auth.js
+export const isAuthenticated = catchAsyncError(async (req, res, next) => {
+  const { token } = req.cookies;
+
+  if (!token) return next(new ErrorHandler("Not Logged In", 401));
+
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  const user = await User.findById(decoded._id);
+
+  if (!user) return next(new ErrorHandler("Unauthorized", 401));
+
+  req.user = user;
+
+  next();
+});
+
+*/
+
+/*
+
+1: npx create-react-app myapp
+2: in src create 3 folder ---> assets  --> docs 
+									   --> images
+									   --> videos
+						  ---> components  --> Login --> Login.jsx
+						  							 --> Login.css
+						  ---> redux --> action --> userAction
+									 --> reducer --> userReducer
+									 --> store.js						  
+				  2 file  ---> app.js
+				  		  ---> index.js
+
+3: npm i axios react-router-dom react-hot-toast react-icons react-redux @reduxjs/toolkit protected-route-react
+4: in app.js import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+<Router>
+	<Routes>
+		<Route
+			path="/signup"
+			element={
+				<ProtectedRoute
+					isAuthenticated={!isAuthenticated}
+					redirect="/"
+				>
+					<Signup />
+				</ProtectedRoute>
+			}
+		/>
+		<Route
+			path="/dashboard"
+			element={
+				<ProtectedRoute
+					adminRoute={true}
+					isAuthenticated={isAuthenticated}
+					isAdmin={user && user.role === "admin"}
+					redirect="/dashboard"
+				>
+					<Dashboard />
+				</ProtectedRoute>
+			}
+		/>
+	</Routes>
+	<Toaster />
+</Router>
+
+5: const { isAuthenticated, user, message, error, loading } = useSelector(
+		(state) => state.user
+	);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (error) {
+			toast.error(error);
+			dispatch({ type: "clearError" });
+		}
+
+		if (message) {
+			toast.success(message);
+			dispatch({ type: "clearMessage" });
+		}
+	}, [dispatch, error, message]);
+
+	useEffect(() => {
+		dispatch(loadUser());
+	}, [dispatch]);
+
+6. store.js  add store in provider as reduxProvider as props
+import { configureStore } from "@reduxjs/toolkit";
+import userReducer from "./reducer/userReducer";
+
+const store = configureStore({
+	reducer: {user: userReducer},
+});
+
+export default store;
+
+export const server = "http://localhost:8000/api/v1";
+
+7: userReducer
+import { createSlice } from "@reduxjs/toolkit";
+
+export const userSlice = createSlice({
+	name: "user",
+	initialState: {
+		isAuthenticated: false,
+		user: null,
+		loading: false,
+		message: null,
+		error: null,
+	},
+	reducers: {
+		signupRequest: (state) => {
+			state.loading = true;
+		},
+		signupSuccess: (state, action) => {
+			state.loading = false;
+			state.isAuthenticated = true;
+			state.user = action.payload.user;
+			state.message = action.payload.message;
+		},
+		signupFail: (state, action) => {
+			state.loading = false;
+			state.isAuthenticated = false;
+			state.error = action.payload;
+		},
+
+		clearError: (state) => {
+			state.error = null;
+		},
+		clearMessage: (state) => {
+			state.message = null;
+		},
+	},
+});
+
+export const {
+	signupRequest,
+	signupSuccess,
+	signupFail,
+	clearError,
+	clearMessage,
+} = userSlice.actions;
+
+export default userSlice.reducer;
+
+8: userAction
+import axios from "axios";
+import { server } from "../store";
+import {
+	signupRequest,
+	signupSuccess,
+	signupFail,
+} from "../reducer/userReducer";
+
+export const signup = (name, email, password) => async (dispatch) => {
+	try {
+		dispatch(signupRequest());
+
+		const { data } = await axios.post(
+			`${server}/register`,
+			{ name, email, password },
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+				withCredentials: true,
+			}
+		);
+
+		dispatch(signupSuccess(data));
+	} catch (error) {
+		dispatch(signupFail(error.response?.data?.message || "Signup failed"));
+	}
+};
+
+*/
+    </pre>
+</body>
 </html>
