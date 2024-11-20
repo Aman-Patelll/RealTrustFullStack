@@ -30,7 +30,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
         <pre>
-               /*
+        /*
 
 1: npm init
 2: Create 6 Folder :- config, controllers, middlewares, routes, models, utils
@@ -186,36 +186,36 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
 
 3: npm i axios react-router-dom react-hot-toast react-icons react-redux @reduxjs/toolkit protected-route-react
 4: in app.js import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-<!-- 
-<Router>
-	<Routes>
-		<Route
+
+Router>
+	Routes>
+		Route
 			path="/signup"
 			element={
-				<ProtectedRoute
+				ProtectedRoute
 					isAuthenticated={!isAuthenticated}
 					redirect="/"
 				>
-					<Signup />
-				</ProtectedRoute>
+					Signup />
+				/ProtectedRoute>
 			}
 		/>
-		<Route
+		Route
 			path="/dashboard"
 			element={
-				<ProtectedRoute
+				ProtectedRoute
 					adminRoute={true}
 					isAuthenticated={isAuthenticated}
 					isAdmin={user && user.role === "admin"}
 					redirect="/dashboard"
 				>
-					<Dashboard />
-				</ProtectedRoute>
+					Dashboard />
+				/ProtectedRoute>
 			}
 		/>
-	</Routes>
-	<Toaster />
-</Router>
+	/Routes>
+	Toaster />
+/Router>
 
 5: const { isAuthenticated, user, message, error, loading } = useSelector(
 		(state) => state.user
@@ -326,8 +326,9 @@ export const signup = (name, email, password) => async (dispatch) => {
 		dispatch(signupFail(error.response?.data?.message || "Signup failed"));
 	}
 };
- -->
+
 */
+
     </pre>
   </body>
 </html>
