@@ -29,8 +29,8 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-        <code>
-        /*
+        <pre>
+               /*
 
 1: npm init
 2: Create 6 Folder :- config, controllers, middlewares, routes, models, utils
@@ -173,19 +173,20 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
 /*
 
 1: npx create-react-app myapp
-2: in src create 3 folder ---> assets  --> docs 
-									   --> images
-									   --> videos
-						  ---> components  --> Login --> Login.jsx
-						  							 --> Login.css
-						  ---> redux --> action --> userAction
-									 --> reducer --> userReducer
-									 --> store.js						  
-				  2 file  ---> app.js
-				  		  ---> index.js
+2: in src create 3 folder --- assets  -- docs 
+									   -- images
+									   -- videos
+						  --- components  -- Login -- Login.jsx
+						  							 -- Login.css
+						  --- redux -- action -- userAction
+									 -- reducer -- userReducer
+									 -- store.js						  
+				  2 file  --- app.js
+				  		  --- index.js
 
 3: npm i axios react-router-dom react-hot-toast react-icons react-redux @reduxjs/toolkit protected-route-react
 4: in app.js import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+<!-- 
 <Router>
 	<Routes>
 		<Route
@@ -325,8 +326,8 @@ export const signup = (name, email, password) => async (dispatch) => {
 		dispatch(signupFail(error.response?.data?.message || "Signup failed"));
 	}
 };
-
+ -->
 */
-    </code>
+    </pre>
   </body>
 </html>
